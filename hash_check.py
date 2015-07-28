@@ -5,7 +5,7 @@
 Author  :   windpro
 E-mail  :   windprog@gmail.com
 Date    :   15/7/25
-Desc    :
+Desc    :   Modify from https://github.com/blacha/hash-check/blob/master/hash-check
 """
 import hashlib
 import StringIO
