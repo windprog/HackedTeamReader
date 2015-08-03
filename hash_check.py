@@ -20,6 +20,12 @@ CODE_SHA1_ERROR = 3
 CODE_CHUNK_NOT_EXIST = 4
 
 
+FILE_DOWNLOAD = os.path.join(os.path.dirname(__file__), 'download.txt')
+FILE_UNDOWNLOAD = os.path.join(os.path.dirname(__file__), 'undownload.txt')
+FILE_SHA1ERROR = os.path.join(os.path.dirname(__file__), 'sha1error.txt')
+FILE_OTHERERROR = os.path.join(os.path.dirname(__file__), 'othererror.txt')
+
+
 class HashCheck(object):
     def __init__(self, torrent_path, path_callback=None):
         if not os.path.isfile(torrent_path):
@@ -218,7 +224,7 @@ if __name__ == '__main__':
         for y in output:
             if y['status_code'] == CODE_SUCCESS:
                 # print y
-                key = 'download.txt'
+                key = FILE_DOWNLOAD
                 if key not in result:
                     result[key] = f = file(key, 'w+')
                 else:
@@ -231,21 +237,21 @@ if __name__ == '__main__':
                 # CODE_SHA1_ERROR = 3
                 # CODE_CHUNK_NOT_EXIST = 4
                 if y['status_code'] == CODE_FILE_NOT_FOUND:
-                    key = 'undownload.txt'
+                    key = FILE_UNDOWNLOAD
                     if key not in result:
                         result[key] = f = file(key, 'w+')
                     else:
                         f = result[key]
                     f.write(y['file'] + '\n')
                 elif y['status_code'] in [CODE_FILE_BYTES_COUNT_ERROR, CODE_SHA1_ERROR]:
-                    key = 'sha1error.txt'
+                    key = FILE_SHA1ERROR
                     if key not in result:
                         result[key] = f = file(key, 'w+')
                     else:
                         f = result[key]
                     f.write(y['file'] + '\n')
                 else:
-                    key = 'othererror.txt'
+                    key = FILE_OTHERERROR
                     if key not in result:
                         result[key] = f = file(key, 'w+')
                     else:
